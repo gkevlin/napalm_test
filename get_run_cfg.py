@@ -17,7 +17,7 @@ password = getpass("Enter Password : ")
 print(username + '   ' + password)
 
 for device in all_devices:
-    #try:
+    try:
     print ('Connecting to : ' + device['ip'])
     #driver created by NAPALM to determine command structure and expects
     driver = napalm.get_network_driver(str(device['driver']))
@@ -39,5 +39,5 @@ for device in all_devices:
                 configFile = open(fileString, 'w')
                 configFile.write('\n'.join(configText.split('\n')[2:]))
                 configFile.close()
-    #except:
-     #   print('Error connecting to ' + device['hostname'])
+    except:
+        print('Error connecting to ' + device['hostname'])
