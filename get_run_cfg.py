@@ -28,7 +28,7 @@ for device in all_devices:
 
         for configType, configText in deviceConfig.iteritems():
             #specifies the file path that the running config will be written to
-            if not configText:
+            if configText:
                 filePath = '/git/config_backup/' + device['site'] + '/' + device['platform'] + '/' + str(device['hostname']) + '/'
                 fileName = str(configType)
                 fileString = filePath + fileName
