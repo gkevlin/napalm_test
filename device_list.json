@@ -4,6 +4,7 @@
     "ip": "172.16.1.60",
     "username": "george",
     "driver": "ios",
+    "site": "sd",
     "platform": "switch" 
   },
 
@@ -11,7 +12,8 @@
     "hostname": "sw2",
     "ip": "172.16.1.61",
     "username": "george",
-    "driver": "ios", 
+    "driver": "ios",
+    "site": "sd",
     "platform": "switch"
   },
 
@@ -19,7 +21,8 @@
     "hostname": "sw3",
     "ip": "172.16.1.62",
     "username": "george",
-    "driver": "ios", 
+    "driver": "ios",
+    "site": "sd",
     "platform": "switch"
   },
 
@@ -27,7 +30,8 @@
     "hostname": "sw4",
     "ip": "172.16.1.63",
     "username": "george",
-    "driver": "ios", 
+    "driver": "ios",
+    "site": "sd",
     "platform": "switch"
   },
 
@@ -36,6 +40,7 @@
     "ip": "172.16.1.64",
     "username": "george",
     "driver": "ios",
+    "site": "sd",
     "platform": "switch" 
   },
 
@@ -44,6 +49,7 @@
     "ip": "172.16.1.65",
     "username": "george",
     "driver": "ios",
+    "site": "sd",
     "platform": "switch"
   }
 ]

@@ -25,16 +25,16 @@ for device in all_devices:
             # Gets start, running, and candidate(if applicable) for device
         deviceConfig = session.get_config()
             #export each config to a file in a local git path
-        for dConfig in deviceConfig:
-            print(str(dConfig))
-        for configType, config in deviceConfig:
+        #for dConfig in deviceConfig:
+           # print(str(dConfig))
+        for configType, configText in deviceConfig.iteritems():
                #specifies the file path that the running config will be written to
             filePath = '/git/config_backup/' + device['site'] + '/' + device['platform'] + '/' + str(device['hostname']) + '/'
-            fileName = str(configType) + '.txt'
+            fileName = str(configType)
             fileString = filePath + fileName
             if not os.path.exists(filePath):
                 os.makedirs(filePath)
             print('Writing running config to : ' + filePath + fileName)
             configFile = open(fileString, 'w')
-            configFile.write('\n'.join(config.split('\n')[2:]))
+            configFile.write('\n'.join(configText.split('\n')[2:]))
             configFile.close()
