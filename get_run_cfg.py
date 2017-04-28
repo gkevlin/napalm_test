@@ -34,7 +34,7 @@ for device in all_devices:
             fileString = filePath + fileName
             if not os.path.exists(filePath):
                 os.makedirs(filePath)
-            print('Writing running config to : ' + filePath + fileName)
+            print('Writing ' + str(configType) + 'config to : ' + filePath + fileName)
             configFile = open(fileString, 'w')
             configFile.write('\n'.join(configText.split('\n')[2:]))
             configFile.close()
