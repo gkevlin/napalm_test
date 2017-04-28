@@ -1,4 +1,5 @@
 import napalm
+import netmiko
 import sys, json, os
 from getpass import getpass
 
