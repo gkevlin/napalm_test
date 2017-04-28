@@ -40,4 +40,4 @@ for device in all_devices:
                     configFile.write('\n'.join(configText.split('\n')[2:]))
                     configFile.close()
     except:
-        print('Error connecting to ' + device)
+        print('Error connecting to ' + device['hostname'])
