@@ -1,36 +1,40 @@
 from napalm import get_network_driver
-import sys, json
+import sys, json, os
+from getpass import getpass
 
-if len(sys.argv) < 2:
-    print('Usage: get_run_cfg.py PASSWORD')
-    exit()
+# Check parameters passed by command line
+#if len(sys.argv) < 3:
+#    print('Usage: get_run_cfg.py USERNAME PASSWORD')
+#    exit()
 
+# Load list of devices
 with open('device_list.json') as device_list:
     all_devices = json.load(device_list)
 
+username = raw_input("Enter Username: ")
+password = getpass("Enter Password : ")
+
+print(username + '   ' + password)
+
 for device in all_devices:
     print ('Connecting to : ' + device['ip'])
+        #driver created by NAPALM to determine command structure and expects
     driver = get_network_driver(str(device['driver']))
-    session = driver(str(device['ip']), str(device['username']), sys.argv[1])
-    session.open()
-    
-    fileString = '/git/switch_configs/' + device['platform'] + '/' + str(device['hostname']) + '.txt'
-    print('Writing config to : ' + fileString)
-    configFile = open(fileString, 'w')
-
-    deviceConfig = session.get_config()
-    strDeviceConfig = deviceConfig['running']
-    configFile.write('\n'.join(strDeviceConfig.split('\n')[2:]))
-
-    configFile.close()
-
-
-#device.open()
-
-#config = device.cli(commands=['show run'])
-
-#for x in config:
-#	print (config[x])
-
-
-#device.close()
+        #session opens device with driver(ip/hostname, username, password)
+    with driver(str(device['ip']), username, password) as session:
+            # Gets start, running, and candidate(if applicable) for device
+        deviceConfig = session.get_config()
+            #export each config to a file in a local git path
+        for dConfig in deviceConfig:
+            print(str(dConfig))
+        for configType, config in deviceConfig:
+               #specifies the file path that the running config will be written to
+            filePath = '/git/config_backup/' + device['site'] + '/' + device['platform'] + '/' + str(device['hostname']) + '/'
+            fileName = str(configType) + '.txt'
+            fileString = filePath + fileName
+            if not os.path.exists(filePath):
+                os.makedirs(filePath)
+            print('Writing running config to : ' + filePath + fileName)
+            configFile = open(fileString, 'w')
+            configFile.write('\n'.join(config.split('\n')[2:]))
+            configFile.close()
