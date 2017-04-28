@@ -39,5 +39,5 @@ for device in all_devices:
                     configFile = open(fileString, 'w')
                     configFile.write('\n'.join(configText.split('\n')[2:]))
                     configFile.close()
-    except NetMikoAuthenticationException:
-        print('Incorrect Username/Password')
+    except:
+        print('Error connecting to ' + device)
