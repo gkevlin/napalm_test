@@ -1,4 +1,4 @@
-from napalm import get_network_driver
+import napalm
 import sys, json, os
 from getpass import getpass
 
@@ -20,7 +20,7 @@ for device in all_devices:
     try:
         print ('Connecting to : ' + device['ip'])
         #driver created by NAPALM to determine command structure and expects
-        driver = get_network_driver(str(device['driver']))
+        driver = napalm.get_network_driver(str(device['driver']))
         #session opens device with driver(ip/hostname, username, password)
         with driver(str(device['ip']), username, password) as session:
             # Gets start, running, and candidate(if applicable) for device
@@ -39,5 +39,3 @@ for device in all_devices:
                     configFile = open(fileString, 'w')
                     configFile.write('\n'.join(configText.split('\n')[2:]))
                     configFile.close()
-    except socket.error:
-        print('Error closing socket')
