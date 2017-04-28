@@ -1,7 +1,7 @@
 [
   { 
     "hostname": "sw1",
-    "ip": "172.16.1.54",
+    "ip": "172.16.1.60",
     "username": "george",
     "driver": "ios",
     "platform": "switch" 
